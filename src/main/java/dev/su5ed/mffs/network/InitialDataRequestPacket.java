@@ -42,7 +42,7 @@ public class InitialDataRequestPacket implements IMessage {
             world.addScheduledTask(() -> {
                 if (world.isBlockLoaded(message.pos)) {
                     Network.findTileEntity(ForceFieldBlockEntity.class, world, message.pos).ifPresent(be -> {
-                        NBTTagCompound data = be.writeToNBT(new NBTTagCompound());
+                        NBTTagCompound data = be.getCustomUpdateTag();
                         Network.sendTo(new UpdateBlockEntityPacket(message.pos, data), player);
                     });
                 }

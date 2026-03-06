@@ -275,8 +275,9 @@ public class ProjectorBlockEntity extends ModularBlockEntity implements Projecto
     @Override
     protected void onInventoryChanged() {
         super.onInventoryChanged();
-        // Update mode light
-        // 1.21.x: this.level.isClientSide() / level.getChunkSource().getLightEngine().checkBlock()
+        // Update mode light (matches 1.20.1 reference behaviour: only re-check projector's own
+        // light level; glow changes on already-projected field blocks take effect on next field
+        // regeneration or chunk reload rather than spamming O(N) packets per inventory change).
         if (this.world != null && !this.world.isRemote) {
             this.world.checkLight(this.pos);
         }

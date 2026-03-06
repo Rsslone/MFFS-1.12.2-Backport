@@ -51,7 +51,7 @@ public class UpdateBlockEntityPacket implements IMessage {
             Minecraft mc = Minecraft.getMinecraft();
             mc.addScheduledTask(() ->
                 Network.findTileEntity(ForceFieldBlockEntity.class, mc.world, message.pos)
-                    .ifPresent(be -> be.readFromNBT(message.data))
+                    .ifPresent(be -> be.handleCustomUpdateTag(message.data))
             );
             return null;
         }
