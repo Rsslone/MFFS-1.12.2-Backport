@@ -1,4 +1,0 @@
-{
-  "default_model": "mffs:block/force_field_default",
-  "loader": "mffs:force_field"
-}
